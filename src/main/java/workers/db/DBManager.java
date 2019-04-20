@@ -1,5 +1,7 @@
 package workers.db;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import workers.Worker;
 import workers.annotations.*;
 
@@ -10,17 +12,20 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 public class DBManager {
+    private static final Logger LOGGER = LogManager.getLogger(DBManager.class);
+
     private static Connection conn;
     private static Statement stmt;
 
     public void connect() {
-
         try {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:workers.db");
             stmt = conn.createStatement();
+            LOGGER.info("Connected to database");
         } catch (Exception e) {
-            throw new RuntimeException("Problem with database conn: " + e.getMessage());
+            LOGGER.error("Problem with database connection: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -28,12 +33,14 @@ public class DBManager {
         try {
             stmt.close();
         } catch (SQLException e) {
-            throw new RuntimeException("Problem with statement close: " + e.getMessage());
+            LOGGER.error("Problem with statement close: " + e.getMessage());
+            throw new RuntimeException(e);
         }
         try {
             conn.close();
         } catch (SQLException e) {
-            throw new RuntimeException("Problem with connection close: " + e.getMessage());
+            LOGGER.error("Problem with connection close: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
     }
@@ -60,8 +67,10 @@ public class DBManager {
         try {
             stmt.executeUpdate(CREATE_ADDITIONAL_QUERY);
             stmt.executeUpdate(CREATE_WORKERS_QUERY);
+            LOGGER.info("Table created if not exists");
         } catch (SQLException e) {
-            throw new RuntimeException("Problem with table creation: " + e.getMessage());
+            LOGGER.error("Problem with table creation: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
    /*     if (!cls.isAnnotationPresent(WorkerTable.class)) {
@@ -126,7 +135,8 @@ public class DBManager {
            return avgSalary;
        }
        catch (SQLException e) {
-           throw new RuntimeException("Problem with select avg by "+columnName+": " + e.getMessage());
+           LOGGER.error("Problem with select avg by "+columnName+": " + e.getMessage());
+           throw new RuntimeException(e);
        }
     }
 
@@ -140,7 +150,8 @@ public class DBManager {
             return avgSalary;
         }
         catch (SQLException e) {
-            throw new RuntimeException("Problem with select avg by "+columnForAvg+": " + e.getMessage());
+            LOGGER.error("Problem with select avg by "+columnForAvg+": " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -169,10 +180,12 @@ public class DBManager {
                 }
 
             } else {
+                LOGGER.error("Something is wrong with Worker additional info inserting");
                 throw new RuntimeException("Something is wrong with Worker additional info inserting");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Problem with prepared statement creation: " + e.getMessage());
+            LOGGER.error("Problem with prepared statement creation: " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
 
@@ -226,7 +239,8 @@ public class DBManager {
         try {
             return stmt.executeQuery(getAllFromTableQuery);
         } catch (SQLException e) {
-            throw new RuntimeException("Problem with object select from db: " + e.getMessage());
+            LOGGER.error("Problem with object select from db: " + e.getMessage());
+            throw new RuntimeException(e);
         }
       /*  if (!cls.isAnnotationPresent(WorkerTable.class)){
             throw new RuntimeException("@WorkerTable is missed");
