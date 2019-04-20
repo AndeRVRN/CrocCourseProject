@@ -9,10 +9,10 @@ public class Worker {
     int id;
 
     @WorkerField
-    String name;
+    String position;
 
     @WorkerField
-    String position;
+    String name;
 
     @WorkerField
     int age;
@@ -31,21 +31,30 @@ public class Worker {
     @AdditionalField(tableName = "additional")
     String address;
 
-    public Worker() {}
+ /*   public Worker() {
+    }*/
 
-    public Worker(int id, String name, int age, String position, int salary, String telephone, String address) {
-        this.id = id;
+    public Worker(String name, String position, int age, int salary, String telephone, String address) {
         this.name = name;
-        this.age = age;
         this.position = position;
+        this.age = age;
         this.salary = salary;
         this.telephone = telephone;
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return "ID = " + id + ", name = " + name + ", position = " + position + ", age = " + age + ", salary = "
+                + salary + ", addInfoID = " + addInfoID + ", telephone = " + telephone + ", address = " + address;
+    }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -80,6 +89,27 @@ public class Worker {
         this.salary = salary;
     }
 
+    public int getAddInfoID() {
+        return addInfoID;
+    }
 
+    public void setAddInfoID(int addInfoID) {
+        this.addInfoID = addInfoID;
+    }
 
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
