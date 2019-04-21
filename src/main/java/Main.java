@@ -1,3 +1,4 @@
+import export.ExportToFile;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import workers.Worker;
@@ -11,11 +12,15 @@ public class Main {
     static WorkerManager workerManager = new WorkerManager();
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
-        CommandHandler commandHandler = new CommandHandler();
+     /*   CommandHandler commandHandler = new CommandHandler();
         if (args.length > 0) {
             commandHandler.defineCommand(args);
         }
-        commandHandler.requestCommandFromUser();
+        commandHandler.requestCommandFromUser();*/
+        ArrayList<Worker> myWorkers = workerManager.getAllWorkers();
+        ExportToFile etf = new ExportToFile(myWorkers);
+
+
         /*try {
             ArrayList<Worker> myWorkers = null;
             Worker worker = new Worker("Mark", "Position1", 10, 70000, "89102324232", "Voronezh");

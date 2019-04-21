@@ -1,11 +1,13 @@
 package workers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import workers.annotations.*;
 
 @WorkerTable(tableName = "workers")
 public class Worker {
     @WorkerField
     @WorkerFieldPrimary
+    @JsonIgnore
     int id;
 
     @WorkerField
@@ -24,6 +26,7 @@ public class Worker {
     @WorkerFieldReference(referencedTabletitle = "additional", referencedFieldTitle = "id")
     @WorkerFieldCascadeDelete
     @AdditionalField(tableName = "additional")
+    @JsonIgnore
     int addInfoID;
 
     @AdditionalField(tableName = "additional")
