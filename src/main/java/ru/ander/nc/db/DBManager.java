@@ -1,4 +1,4 @@
-package ru.ander.nc.workers.db;
+package ru.ander.nc.db;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -126,7 +126,7 @@ public class DBManager {
                 ps.setInt(5, newAdditionalID);
                 ps.executeUpdate();
 
-                int newWorkerID = getLatestIDFromTable("ru/ander/nc/workers");
+                int newWorkerID = getLatestIDFromTable("workers");
                 if (newWorkerID != -1) {
                     worker.setId(newWorkerID);
                 }
@@ -147,7 +147,7 @@ public class DBManager {
         try {
             return stmt.executeQuery(getAllFromTableQuery);
         } catch (SQLException e) {
-            LOGGER.error("Problem with object select from ru.ander.nc.db: " + e.getMessage());
+            LOGGER.error("Problem with object select from db: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }

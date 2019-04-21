@@ -2,7 +2,7 @@ package ru.ander.nc.workers;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import ru.ander.nc.workers.db.DBManager;
+import ru.ander.nc.db.DBManager;
 
 
 import java.sql.ResultSet;
