@@ -1,13 +1,13 @@
-import export.ExportToDB;
-import export.ExportToFile;
+import ru.ander.nc.export.ExportToDB;
+import ru.ander.nc.export.ExportToFile;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import workers.Worker;
-import workers.WorkerManager;
+import ru.ander.nc.workers.Worker;
+import ru.ander.nc.workers.WorkerManager;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class GetDataFromDBTest {
             }
         } catch (Exception e) {
             LOGGER.error(e);
-            Assert.fail("Error while getting all workers from DB test.");
+            Assert.fail("Error while getting all ru.ander.nc.workers from DB test.");
         }
     }
 
@@ -46,7 +46,7 @@ public class GetDataFromDBTest {
             LOGGER.info("Average salary = " + avgSalary);
         } catch (Exception e) {
             LOGGER.error(e);
-            Assert.fail("Error while getting average salary from workers.");
+            Assert.fail("Error while getting average salary from ru.ander.nc.workers.");
         }
     }
 
@@ -63,7 +63,7 @@ public class GetDataFromDBTest {
             LOGGER.info("Average salary by '" + position + "' position = " + avgSalary);
         } catch (Exception e) {
             LOGGER.error(e);
-            Assert.fail("Error while getting average salary from workers by position = " + position + ".");
+            Assert.fail("Error while getting average salary from ru.ander.nc.workers by position = " + position + ".");
         }
     }
 

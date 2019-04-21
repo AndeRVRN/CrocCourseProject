@@ -2,13 +2,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import export.ExportToDB;
-import export.ExportToFile;
+import ru.ander.nc.Main;
+import ru.ander.nc.export.ExportToDB;
+import ru.ander.nc.export.ExportToFile;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import workers.Worker;
-import workers.WorkerManager;
+import ru.ander.nc.workers.Worker;
+import ru.ander.nc.workers.WorkerManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class ExportTest {
             Assert.fail("Problem with write data in json file: " + e.getMessage());
         } catch (Exception e) {
             LOGGER.error(e);
-            Assert.fail("Error while export JSON file to DB.");
+            Assert.fail("Error while ru.ander.nc.export JSON file to DB.");
         } finally {
             File file = new File(jsonFileName + ".json");
             if (file.exists()) {
@@ -85,7 +86,7 @@ public class ExportTest {
 
         } catch (Exception e) {
             LOGGER.error(e);
-            Assert.fail("Error while export DB to XML file.");
+            Assert.fail("Error while ru.ander.nc.export DB to XML file.");
         } finally {
             file = new File(xmlFileName + ".xml");
             if (file.exists()) {

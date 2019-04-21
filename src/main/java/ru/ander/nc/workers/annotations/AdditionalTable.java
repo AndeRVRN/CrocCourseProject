@@ -1,4 +1,4 @@
-package workers.annotations;
+package ru.ander.nc.workers.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

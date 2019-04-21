@@ -1,12 +1,12 @@
-package export;
+package ru.ander.nc.export;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import workers.Worker;
-import workers.WorkerManager;
+import ru.ander.nc.workers.Worker;
+import ru.ander.nc.workers.WorkerManager;
 
 import java.io.File;
 import java.io.IOException;

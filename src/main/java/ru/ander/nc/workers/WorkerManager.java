@@ -1,8 +1,9 @@
-package workers;
+package ru.ander.nc.workers;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import workers.db.DBManager;
+import ru.ander.nc.workers.db.DBManager;
+
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ public class WorkerManager {
     private static final Logger LOGGER = LogManager.getLogger(WorkerManager.class);
 
     protected DBManager dbManager = new DBManager();
+
     protected ArrayList<Worker> myWorkers = new ArrayList<>();
 
     protected double avgSalaryForAllWorkers = 0;

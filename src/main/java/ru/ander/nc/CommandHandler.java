@@ -1,7 +1,9 @@
-import export.ExportToDB;
-import export.ExportToFile;
-import workers.Worker;
-import workers.WorkerManager;
+package ru.ander.nc;
+
+import ru.ander.nc.export.ExportToDB;
+import ru.ander.nc.export.ExportToFile;
+import ru.ander.nc.workers.Worker;
+import ru.ander.nc.workers.WorkerManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -74,7 +76,7 @@ public class CommandHandler {
                 }
             case CMD_FIND_AVG_SALARY:
                 if (cmd.length == 1) {
-                    System.out.println("Average salary for workers is " + workerManager.getAvgSalary());
+                    System.out.println("Average salary for ru.ander.nc.workers is " + workerManager.getAvgSalary());
                     break;
                 } else {
                     System.out.println("This command doesn't have arguments");
@@ -99,7 +101,7 @@ public class CommandHandler {
                     if (myWorker != null) {
                         System.out.println("Worker by " + cmd[1] + " telephone: " + myWorker.toString());
                     } else {
-                        System.out.println("No workers found by " + cmd[1] + " telephone");
+                        System.out.println("No ru.ander.nc.workers found by " + cmd[1] + " telephone");
                     }
                     break;
                 } else {
@@ -127,13 +129,13 @@ public class CommandHandler {
 
     private void printHelp() {
         System.out.println("Available commands: ");
-        System.out.println("getAll - show all workers;");
+        System.out.println("getAll - show all ru.ander.nc.workers;");
         System.out.println("createWorker (Name) (Position) (Age) (Salary) (Telephone) (Address) - create new worker;");
-        System.out.println("findAvgSalary - calculate average salary from all workers;");
-        System.out.println("findAvgSalaryByPosition (Position) - find average salary from workers filtrated by positions;");
+        System.out.println("findAvgSalary - calculate average salary from all ru.ander.nc.workers;");
+        System.out.println("findAvgSalaryByPosition (Position) - find average salary from ru.ander.nc.workers filtrated by positions;");
         System.out.println("findWorkerByTelephone (Telephone) - find worker by telephone;");
-        System.out.println("exportToDB (JSONFileName) - export JSON file to database;");
-        System.out.println("exportToFile (XMLFileName) - export all database to xml file;");
+        System.out.println("exportToDB (JSONFileName) - ru.ander.nc.export JSON file to database;");
+        System.out.println("exportToFile (XMLFileName) - ru.ander.nc.export all database to xml file;");
         System.out.println("exit - close application.");
 
     }

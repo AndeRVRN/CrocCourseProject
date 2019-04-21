@@ -1,4 +1,4 @@
-package workers;
+package ru.ander.nc.workers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,8 +16,7 @@ public class Worker {
     String telephone;
     String address;
 
-    public Worker() {
-    }
+    public Worker() {}
 
     public Worker(String name, String position, int age, int salary, String telephone, String address) {
         this.name = name;
