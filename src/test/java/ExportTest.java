@@ -6,8 +6,7 @@ import export.ExportToDB;
 import export.ExportToFile;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 import workers.Worker;
 import workers.WorkerManager;
 
@@ -20,9 +19,21 @@ public class ExportTest {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-    WorkerManager workerManager = new WorkerManager();
-    private ExportToDB etd = new ExportToDB();
-    private ExportToFile etf = new ExportToFile();
+    private static WorkerManager workerManager;
+    private static ExportToDB etd;
+    private static ExportToFile etf;
+
+    @BeforeClass
+    public static void initTest() {
+        workerManager = new WorkerManager();
+        etd = new ExportToDB();
+        etf = new ExportToFile();
+    }
+
+    @AfterClass
+    public static void disposeTest() {
+        workerManager.dispose();
+    }
 
     @Test
     public void exportToDBTest() {

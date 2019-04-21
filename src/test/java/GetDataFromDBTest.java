@@ -1,6 +1,10 @@
+import export.ExportToDB;
+import export.ExportToFile;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import workers.Worker;
 import workers.WorkerManager;
@@ -10,7 +14,17 @@ import java.util.ArrayList;
 public class GetDataFromDBTest {
     private static final Logger LOGGER = LogManager.getLogger(GetDataFromDBTest.class);
 
-    WorkerManager workerManager = new WorkerManager();
+    private static WorkerManager workerManager = new WorkerManager();
+
+    @BeforeClass
+    public static void initTest() {
+        workerManager = new WorkerManager();
+    }
+
+    @AfterClass
+    public static void disposeTest() {
+        workerManager.dispose();
+    }
 
     @Test
     public void getAllWorkerTest() {
@@ -57,7 +71,7 @@ public class GetDataFromDBTest {
     public void getWorkerByTelephoneTest() {
         try {
             Worker worker = workerManager.getWorkerByTelephone("89102846320");
-            LOGGER.info("Worker by telephone = " +worker.toString());
+            LOGGER.info("Worker by telephone = " + worker.toString());
         } catch (Exception e) {
             LOGGER.error(e);
             Assert.fail("Error while getting worker by telephone.");

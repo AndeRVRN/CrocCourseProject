@@ -1,0 +1,15 @@
+[ {
+  "position" : "Doctor",
+  "name" : "Molly",
+  "age" : 23,
+  "salary" : 34000,
+  "telephone" : "89102331231",
+  "address" : "Michigan"
+}, {
+  "position" : "Mechanic",
+  "name" : "John",
+  "age" : 26,
+  "salary" : 75000,
+  "telephone" : "89104334232",
+  "address" : "Costa"
+}]

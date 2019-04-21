@@ -1,8 +1,8 @@
+import export.ExportToDB;
+import export.ExportToFile;
 import workers.Worker;
 import workers.WorkerManager;
 
-import java.sql.ResultSet;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +19,8 @@ public class CommandHandler {
     private static final String CMD_EXPORT_TO_FILE = "exportToFile";
 
     private WorkerManager workerManager = new WorkerManager();
+    private ExportToDB etd = new ExportToDB();
+    private ExportToFile etf = new ExportToFile();
 
     public CommandHandler() {
         System.out.println("Welcome to Course Project done by Erik.");
@@ -41,16 +43,11 @@ public class CommandHandler {
     }
 
     private void printArrayList(ArrayList<Worker> arrayList) {
-        for (Worker worker: arrayList) {
+        for (Worker worker : arrayList) {
             System.out.println(worker.toString());
         }
     }
-    /**
-     *
-     * @param cmd
-     * @return -1 - command exit
-     * @return 0 - command is unsupported
-     */
+
     public void defineCommand(String[] cmd) {
         switch (cmd[0]) {
             case CMD_EXIT:
@@ -77,7 +74,7 @@ public class CommandHandler {
                 }
             case CMD_FIND_AVG_SALARY:
                 if (cmd.length == 1) {
-                    System.out.println("Average salary for workers is h" + workerManager.getAvgSalary());
+                    System.out.println("Average salary for workers is " + workerManager.getAvgSalary());
                     break;
                 } else {
                     System.out.println("This command doesn't have arguments");
@@ -111,6 +108,7 @@ public class CommandHandler {
                 }
             case CMD_EXPORT_TO_DB:
                 if (cmd.length == 2) {
+                    etd.export(cmd[1], workerManager);
                     break;
                 } else {
                     System.out.println("Invalid input command. Example: 'exportToDB (JSONFileName)'");
@@ -118,6 +116,7 @@ public class CommandHandler {
                 }
             case CMD_EXPORT_TO_FILE:
                 if (cmd.length == 2) {
+                    etf.export(cmd[1], workerManager.getAllWorkers());
                     break;
                 } else {
                     System.out.println("Invalid input command. Example: 'exportToFile (XMLFileName)'");
@@ -125,7 +124,6 @@ public class CommandHandler {
                 }
         }
     }
-
 
     private void printHelp() {
         System.out.println("Available commands: ");
@@ -138,5 +136,9 @@ public class CommandHandler {
         System.out.println("exportToFile (XMLFileName) - export all database to xml file;");
         System.out.println("exit - close application.");
 
+    }
+
+    public void dispose() {
+        workerManager.dispose();
     }
 }

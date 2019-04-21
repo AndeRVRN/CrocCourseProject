@@ -1,41 +1,23 @@
 package workers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import workers.annotations.*;
 
-@WorkerTable(tableName = "workers")
+
 public class Worker {
-    @WorkerField
-    @WorkerFieldPrimary
     @JsonIgnore
     int id;
-
-    @WorkerField
     String position;
-
-    @WorkerField
     String name;
-
-    @WorkerField
     int age;
-
-    @WorkerField
     int salary;
 
-    @WorkerField
-    @WorkerFieldReference(referencedTabletitle = "additional", referencedFieldTitle = "id")
-    @WorkerFieldCascadeDelete
-    @AdditionalField(tableName = "additional")
     @JsonIgnore
     int addInfoID;
-
-    @AdditionalField(tableName = "additional")
     String telephone;
-    @AdditionalField(tableName = "additional")
     String address;
 
- /*   public Worker() {
-    }*/
+    public Worker() {
+    }
 
     public Worker(String name, String position, int age, int salary, String telephone, String address) {
         this.name = name;
