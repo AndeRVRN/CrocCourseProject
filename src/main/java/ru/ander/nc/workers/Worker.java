@@ -5,16 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Worker {
     @JsonIgnore
-    int id;
-    String position;
-    String name;
-    int age;
-    int salary;
+    private int id;
+    private String position;
+    private String name;
+    private int age;
+    private int salary;
 
-    @JsonIgnore
-    int addInfoID;
-    String telephone;
-    String address;
+    private WorkerAdditional workerAdditional;
 
     public Worker() {}
 
@@ -23,14 +20,21 @@ public class Worker {
         this.position = position;
         this.age = age;
         this.salary = salary;
-        this.telephone = telephone;
-        this.address = address;
+        workerAdditional = new WorkerAdditional(telephone, address);
     }
 
     @Override
     public String toString() {
         return "ID = " + id + ", name = " + name + ", position = " + position + ", age = " + age + ", salary = "
-                + salary + ", addInfoID = " + addInfoID + ", telephone = " + telephone + ", address = " + address;
+                + salary + ", addInfoID = " + workerAdditional.getAddInfoID() + ", telephone = " + workerAdditional.getTelephone() + ", address = " + workerAdditional.getAddress();
+    }
+
+    public WorkerAdditional getWorkerAdditional() {
+        return workerAdditional;
+    }
+
+    public void setWorkerAdditional(WorkerAdditional workerAdditional) {
+        this.workerAdditional = workerAdditional;
     }
 
     public int getId() {
@@ -73,27 +77,4 @@ public class Worker {
         this.salary = salary;
     }
 
-    public int getAddInfoID() {
-        return addInfoID;
-    }
-
-    public void setAddInfoID(int addInfoID) {
-        this.addInfoID = addInfoID;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

@@ -111,8 +111,8 @@ public class DBManager {
         try {
             String insertQuery = "INSERT INTO additional (telephone, address) VALUES (?,?)";
             PreparedStatement ps = conn.prepareStatement(insertQuery);
-            ps.setString(1, worker.getTelephone());
-            ps.setString(2, worker.getAddress());
+            ps.setString(1, worker.getWorkerAdditional().getTelephone());
+            ps.setString(2, worker.getWorkerAdditional().getAddress());
             ps.executeUpdate();
 
             int newAdditionalID = getLatestIDFromTable("additional");
@@ -156,7 +156,7 @@ public class DBManager {
                         rs.getString("address")
                 );
                 newWorker.setId(rs.getInt("workerID"));
-                newWorker.setAddInfoID(rs.getInt("addID"));
+                newWorker.getWorkerAdditional().setAddInfoID(rs.getInt("addID"));
                 myWorkers.add(newWorker);
                 LOGGER.info(newWorker);
             }

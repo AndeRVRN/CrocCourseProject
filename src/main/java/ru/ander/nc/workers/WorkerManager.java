@@ -49,7 +49,7 @@ public class WorkerManager {
 
     public Worker getWorkerByTelephone(String telephone) {
         for (Worker curWorker : myWorkers) {
-            if (curWorker.getTelephone() != null && curWorker.getTelephone().equals(telephone)) {
+            if (curWorker.getWorkerAdditional().getTelephone() != null && curWorker.getWorkerAdditional().getTelephone().equals(telephone)) {
                 LOGGER.info("Worker by telephone = " + curWorker.toString());
                 return curWorker;
             }
