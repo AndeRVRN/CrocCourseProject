@@ -59,25 +59,7 @@ public class WorkerManager {
 
     public ArrayList<Worker> getAllWorkers() {
         if (myWorkers.isEmpty()) {
-            try {
-                ResultSet rs = dbManager.getAllWorkersFromTable();
-                while (rs.next()) {
-                    Worker newWorker = new Worker(rs.getString("name"),
-                            rs.getString("position"),
-                            rs.getInt("age"),
-                            rs.getInt("salary"),
-                            rs.getString("telephone"),
-                            rs.getString("address")
-                    );
-                    newWorker.setId(rs.getInt("workerID"));
-                    newWorker.setAddInfoID(rs.getInt("addID"));
-                    myWorkers.add(newWorker);
-                    LOGGER.info(newWorker);
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            myWorkers = dbManager.getAllWorkersFromTable();
         }
         return myWorkers;
     }

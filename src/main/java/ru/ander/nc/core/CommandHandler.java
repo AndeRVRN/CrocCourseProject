@@ -23,7 +23,7 @@ public class CommandHandler {
     private WorkerManager workerManager = new WorkerManager();
     private ExportToDB etd = new ExportToDB();
     private ExportToFile etf = new ExportToFile();
-
+    private Scanner scanner = new Scanner(System.in);
     public CommandHandler() {
         System.out.println("Welcome to Course Project done by Erik.");
         System.out.println("To get additional info type 'help' in console.");
@@ -32,7 +32,6 @@ public class CommandHandler {
     public void requestCommandFromUser() {
         while (true) {
             System.out.print("Enter command: ");
-            Scanner scanner = new Scanner(System.in);
             String cmd = scanner.nextLine();
             String[] s = cmd.split(" ");
             if (cmd.length() == 0 || s.length == 0) {
@@ -60,28 +59,25 @@ public class CommandHandler {
             case CMD_GET_ALL:
                 if (cmd.length == 1) {
                     printArrayList(workerManager.getAllWorkers());
-                    break;
                 } else {
                     System.out.println("This command doesn't have arguments");
-                    break;
                 }
+                break;
             case CMD_CREATE_WORKER:
                 if (cmd.length == 7) {
                     Worker worker = new Worker(cmd[1], cmd[2], Integer.valueOf(cmd[3]), Integer.valueOf(cmd[4]), cmd[5], cmd[6]);
                     workerManager.createNewWorker(worker);
-                    break;
                 } else {
                     System.out.println("Invalid input command. Example: 'createWorker (Name) (Position) (Age) (Salary) (Telephone) (Address)'");
-                    break;
                 }
+                break;
             case CMD_FIND_AVG_SALARY:
                 if (cmd.length == 1) {
                     System.out.println("Average salary for workers is " + workerManager.getAvgSalary());
-                    break;
                 } else {
                     System.out.println("This command doesn't have arguments");
-                    break;
                 }
+                break;
             case CMD_FIND_AVG_SALARY_BY_POSITION:
                 if (cmd.length == 2) {
                     double avgSalary = workerManager.getAvgSalaryByPosition(cmd[1]);
@@ -90,11 +86,10 @@ public class CommandHandler {
                     } else {
                         System.out.println("Average salary by position '" + cmd[1] + "' cannot be calculated");
                     }
-                    break;
                 } else {
                     System.out.println("Invalid input command. Example: 'findAvgSalaryByPosition (Position)'");
-                    break;
                 }
+                break;
             case CMD_FIND_WORKER_BY_TELEPHONE:
                 if (cmd.length == 2) {
                     Worker myWorker = workerManager.getWorkerByTelephone(cmd[1]);
@@ -103,27 +98,24 @@ public class CommandHandler {
                     } else {
                         System.out.println("No workers found by " + cmd[1] + " telephone");
                     }
-                    break;
                 } else {
                     System.out.println("Invalid input command. Example: 'findWorkerByTelephone (Telephone)'");
-                    break;
                 }
+                break;
             case CMD_EXPORT_TO_DB:
                 if (cmd.length == 2) {
                     etd.export(cmd[1], workerManager);
-                    break;
                 } else {
                     System.out.println("Invalid input command. Example: 'exportToDB (JSONFileName)'");
-                    break;
                 }
+                break;
             case CMD_EXPORT_TO_FILE:
                 if (cmd.length == 2) {
                     etf.export(cmd[1], workerManager.getAllWorkers());
-                    break;
                 } else {
                     System.out.println("Invalid input command. Example: 'exportToFile (XMLFileName)'");
-                    break;
                 }
+                break;
         }
     }
 

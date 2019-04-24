@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import ru.ander.nc.workers.Worker;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBManager {
     private static final Logger LOGGER = LogManager.getLogger(DBManager.class);
@@ -29,7 +30,6 @@ public class DBManager {
             stmt.close();
         } catch (SQLException e) {
             LOGGER.error("Problem with statement close: " + e.getMessage());
-            throw new RuntimeException(e);
         }
         try {
             conn.close();
@@ -141,14 +141,30 @@ public class DBManager {
         }
     }
 
-    public ResultSet getAllWorkersFromTable() {
+    public ArrayList<Worker> getAllWorkersFromTable() {
         String getAllFromTableQuery = "SELECT w.id as workerID, w.name, w.position, w.age, w.salary, w.addInfoID, a.id as addID, a.telephone, a.address " +
                 "FROM workers w, additional a where w.addInfoId = a.id";
+        ArrayList<Worker> myWorkers = new ArrayList<>();
         try {
-            return stmt.executeQuery(getAllFromTableQuery);
+            ResultSet rs = stmt.executeQuery(getAllFromTableQuery);
+            while (rs.next()) {
+                Worker newWorker = new Worker(rs.getString("name"),
+                        rs.getString("position"),
+                        rs.getInt("age"),
+                        rs.getInt("salary"),
+                        rs.getString("telephone"),
+                        rs.getString("address")
+                );
+                newWorker.setId(rs.getInt("workerID"));
+                newWorker.setAddInfoID(rs.getInt("addID"));
+                myWorkers.add(newWorker);
+                LOGGER.info(newWorker);
+            }
+
         } catch (SQLException e) {
-            LOGGER.error("Problem with object select from db: " + e.getMessage());
+            LOGGER.error("Something wrong with get all workers from db.");
             throw new RuntimeException(e);
         }
+        return myWorkers;
     }
 }
